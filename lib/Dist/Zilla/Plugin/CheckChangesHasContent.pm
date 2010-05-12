@@ -27,13 +27,15 @@ sub before_release {
   my $changes_file = $self->changelog;
   my $newver = $self->zilla->version;
 
+  $self->log("Checking Changes");
+
   $self->zilla->ensure_built_in;
   
   # chdir in
   my $wd = File::pushd::pushd($self->zilla->built_in);
 
   # Must have Changes file
-  -e $changes_file or $self->log_fatal("No $changes_file found");
+  -e $changes_file or $self->log_fatal("No $changes_file file found");
 
   # Changes must have content
   $self->_get_changes 
