@@ -34,12 +34,15 @@ sub before_release {
   # chdir in
   my $wd = File::pushd::pushd($self->zilla->built_in);
 
-  # Must have Changes file
-  -e $changes_file or $self->log_fatal("No $changes_file file found");
-
-  # Changes must have content
-  $self->_get_changes 
-    or $self->log_fatal("$changes_file has no content for $newver");
+  if ( ! -e $changes_file ) {
+    $self->log_fatal("No $changes_file file found");
+  }
+  elsif ( $self->_get_changes ) {
+    $self->log("$changes_file OK");
+  }
+  else {
+    $self->log_fatal("$changes_file has no content for $newver");
+  }
 
   return;
 }
