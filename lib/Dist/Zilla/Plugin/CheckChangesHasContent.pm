@@ -14,10 +14,10 @@ use namespace::autoclean 0.09;
 
 with 'Dist::Zilla::Role::BeforeRelease';
 
-has changelog => ( 
-  is => 'ro', 
+has changelog => (
+  is => 'ro',
   isa => 'Str',
-  default => 'Changes' 
+  default => 'Changes'
 );
 
 # methods
@@ -30,7 +30,7 @@ sub before_release {
   $self->log("Checking Changes");
 
   $self->zilla->ensure_built_in;
-  
+
   # chdir in
   my $wd = File::pushd::pushd($self->zilla->built_in);
 
@@ -78,20 +78,44 @@ __END__
 
 = SYNOPSIS
 
-  use Dist::Zilla::Plugin::CheckChangesHasContent;
+  # in dist.ini
+
+  [CheckChangesHasContent]
 
 = DESCRIPTION
 
-This module might be cool, but you'd never know it from the lack
-of documentation.
+This is a "before release" Dist::Zilla plugin that ensures that your Changes
+file actually has some content since the last release.  If it doesn't find any,
+it will abort the release process.
 
-= USAGE
+The algorithm is very naive.  It looks for an unindented line starting with
+the version to be released.  It then looks for any text from that line until
+the next unindented line (or the end of the file), ignoring whitespace.
 
-Good luck!
+For example, in the file below, algorithm will find "- blah blah blah":
+
+  Changes file for Foo-Bar
+
+  {{$NEXT}}
+
+    - blah blah blah
+
+  0.001  Wed May 12 13:49:13 EDT 2010
+
+    - the first release
+
+If you had nothing but whitespace between { {{$NEXT}} } and { 0.001 },
+the release would be halted.
+
+If you name your change log something other than "Changes", you can configure
+the name with the {changelog} argument:
+
+  [CheckChangesHasContent]
+  changelog = ChangeLog
 
 = SEE ALSO
 
-Maybe other modules do related things.
+* [Dist::Zilla]
 
 =end wikidoc
 
