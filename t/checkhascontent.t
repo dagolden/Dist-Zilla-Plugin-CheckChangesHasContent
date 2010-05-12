@@ -5,13 +5,13 @@ use warnings;
 
 use Capture::Tiny qw/capture/;
 use Dist::Zilla::Tester;
-use Test::More 0.88;
+use Test::More 0.88; END { done_testing }
 use Try::Tiny;
 
 ## Tests start here
 
 {
-  my ($tzil, $stdout, $stderr);
+  my $tzil;
   try {
     $tzil = Dist::Zilla::Tester->from_config(
       { dist_root => 'corpus/DZ' },
@@ -33,29 +33,75 @@ use Try::Tiny;
   }
 }
 
-#{
-#  my $tzil = Dist::Zilla::Tester->from_config(
-#    { dist_root => 'corpus/DZ' },
-#    {
-#      add_files => {
-#        'source/xt/checkme.t' => $xt_pass,
-#      },
-#    },
-#  );
-#  ok( $tzil, "created test dist that will pass xt tests");
-#
-#  capture { $tzil->release };
-#
-#  ok(
-#    ! grep({ /Fatal errors in xt/i } @{ $tzil->log_messages }),
-#    "No xt errors logged",
-#  );
-#  ok(
-#    grep({ /fake release happen/i } @{ $tzil->log_messages }),
-#    "FakeRelease executed",
-#  );
-#
-#}
+{
+  my $tzil;
+  try {
+    $tzil = Dist::Zilla::Tester->from_config(
+      { dist_root => 'corpus/DZ' },
+      {
+        add_files => {
+          'source/Changes' => <<'END',
+Changes
 
-done_testing;
+{{$NEXT}}
+
+END
+        },
+      },
+    );
+    ok( $tzil, "created test dist with stub Changes file");
+
+    capture { $tzil->release };
+  } catch {
+    my $err = $_;
+    like(
+      $err,
+      qr/Changes has no content for 1\.23/i,
+      "saw empty Changes warning",
+    );
+    ok(
+      ! grep({ /fake release happen/i } @{ $tzil->log_messages }),
+      "FakeRelease did not happen",
+    );
+  }
+}
+
+{
+  my $tzil;
+  try {
+    $tzil = Dist::Zilla::Tester->from_config(
+      { dist_root => 'corpus/DZ' },
+      {
+        add_files => {
+          'source/Changes' => <<'END',
+Changes
+
+{{$NEXT}}
+
+1.22    2010-05-12 00:33:53 EST5EDT
+
+  - not really released
+
+END
+        },
+      },
+    );
+    ok( $tzil, "created test dist with no new Changes");
+
+    capture { $tzil->release };
+  } catch {
+    my $err = $_;
+    like(
+      $err,
+      qr/Changes has no content for 1\.23/i,
+      "saw empty Changes warning",
+    );
+    ok(
+      ! grep({ /fake release happen/i } @{ $tzil->log_messages }),
+      "FakeRelease did not happen",
+    );
+  }
+}
+
+
 
