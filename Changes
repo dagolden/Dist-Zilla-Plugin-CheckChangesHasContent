@@ -2,6 +2,9 @@ Revision history for Dist-Zilla-Plugin-CheckChangesHasContent
 
 {{$NEXT}}
 
+    - allow Changes entry to be '$version' alone on a line
+      [bug noted by Apocalypse]
+
 0.002     2010-05-12 18:51:31 America/New_York
 
     - fix repository information
