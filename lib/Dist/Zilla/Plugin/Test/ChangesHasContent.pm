@@ -61,6 +61,8 @@ SKIP: {
 
 done_testing;
 
+# _get_changes copied and adapted from Dist::Zilla::Plugin::Git::Commit
+# by Jerome Quelin
 sub _get_changes
 {
     my $newver = shift;
