@@ -7,6 +7,7 @@ use Test::Harness;
 use Path::Class;
 use Cwd 'getcwd';
 use IO::Scalar;
+use Capture::Tiny qw/capture/;
 
 my $test_file = file(qw(xt release changes_has_content.t));
 my $root = 'corpus/DZ_Test_ChangesHasContent';
@@ -19,12 +20,11 @@ sub capture_test_results($)
     my $cwd = getcwd;
     chdir $build_dir;
 
-    my $output;
-    # I'd use TAP::Parser here, except the docs are horrid.
-    my @results = Test::Harness::execute_tests(
-        tests => [$test_file_full],
-        out => IO::Scalar->new(\$output),
-    );
+    my ($output, $error, @results) = capture {
+      # I'd use TAP::Parser here, except the docs are horrid.
+       Test::Harness::execute_tests(tests => [$test_file_full]);
+    };
+
     chdir $cwd;
     return @results, $output;
 }
