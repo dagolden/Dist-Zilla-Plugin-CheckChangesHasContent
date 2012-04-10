@@ -42,7 +42,7 @@ __PACKAGE__->meta->make_immutable;
 1;
 
 __DATA__
-___[ xt/release/check_changes_has_content.t ]___
+___[ xt/release/changes_has_content.t ]___
 #!perl
 
 use Test::More tests => 2;

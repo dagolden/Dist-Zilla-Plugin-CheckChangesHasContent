@@ -8,7 +8,7 @@ use Path::Class;
 use Cwd 'getcwd';
 use IO::Scalar;
 
-my $test_file = file(qw(xt release check_changes_has_content.t));
+my $test_file = file(qw(xt release changes_has_content.t));
 my $root = 'corpus/DZ_Test_ChangesHasContent';
 
 sub capture_test_results($)
