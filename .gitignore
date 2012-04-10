@@ -14,3 +14,5 @@
 /PM_to_blib
 /MYMETA.yml
 /Dist-Zilla-Plugin-CheckChangesHasContent-*
+*.sw*
+/tmp/

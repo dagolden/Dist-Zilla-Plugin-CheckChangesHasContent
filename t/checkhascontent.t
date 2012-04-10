@@ -8,13 +8,15 @@ use Dist::Zilla::Tester;
 use Test::More 0.88; END { done_testing }
 use Try::Tiny;
 
+my $root = 'corpus/DZ_CheckChangesHasContent';
+
 ## Tests start here
 
 {
   my $tzil;
   try {
     $tzil = Dist::Zilla::Tester->from_config(
-      { dist_root => 'corpus/DZ' },
+      { dist_root => $root },
     );
     ok( $tzil, "created test dist with no Changes file");
 
@@ -37,7 +39,7 @@ use Try::Tiny;
   my $tzil;
   try {
     $tzil = Dist::Zilla::Tester->from_config(
-      { dist_root => 'corpus/DZ' },
+      { dist_root => $root },
       {
         add_files => {
           'source/Changes' => <<'END',
@@ -70,7 +72,7 @@ END
   my $tzil;
   try {
     $tzil = Dist::Zilla::Tester->from_config(
-      { dist_root => 'corpus/DZ' },
+      { dist_root => $root },
       {
         add_files => {
           'source/Changes' => <<'END',
@@ -108,7 +110,7 @@ END
   my $tzil;
   try {
     $tzil = Dist::Zilla::Tester->from_config(
-      { dist_root => 'corpus/DZ' },
+      { dist_root => $root },
       {
         add_files => {
           'source/Changes' => <<'END',
@@ -147,7 +149,7 @@ END
   my $tzil;
   try {
     $tzil = Dist::Zilla::Tester->from_config(
-      { dist_root => 'corpus/DZ' },
+      { dist_root => $root },
       {
         add_files => {
           'source/Changes' => <<'END',
