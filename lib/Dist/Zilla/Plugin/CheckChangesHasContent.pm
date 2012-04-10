@@ -89,7 +89,7 @@ file actually has some content since the last release.  If it doesn't find any,
 it will abort the release process.
 
 This can be contrasted to
-L<[Test::ChangesHasContent}|Dist::Zilla::Plugin::Test::ChangesHasContent>, which
+L<[Test::ChangesHasContent]|Dist::Zilla::Plugin::Test::ChangesHasContent>, which
 generates a test to perform the check.
 
 The algorithm is very naive.  It looks for an unindented line starting with

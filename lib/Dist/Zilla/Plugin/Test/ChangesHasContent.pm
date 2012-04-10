@@ -108,7 +108,7 @@ This test ensures ensures that your Changes file actually has some content
 since the last release.
 
 This can be contrasted to
-L<[CheckChangesHasContent}|Dist::Zilla::Plugin::CheckChangesHasContent>, which
+L<[CheckChangesHasContent]|Dist::Zilla::Plugin::CheckChangesHasContent>, which
 performs the check at release time, halting the release process if content is
 missing.  Performing the check as a test makes it possible to check more
 frequently, and closer to the point of development.
