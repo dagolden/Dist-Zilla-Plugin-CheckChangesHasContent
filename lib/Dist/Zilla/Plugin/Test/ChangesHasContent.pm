@@ -15,12 +15,13 @@ use namespace::autoclean 0.09;
 extends 'Dist::Zilla::Plugin::InlineFiles';
 with qw/Dist::Zilla::Role::TextTemplate/;
 
-
 has changelog => (
   is => 'ro',
   isa => 'Str',
   default => 'Changes'
 );
+
+# methods
 
 around add_file => sub {
     my ($orig, $self, $file) = @_;
@@ -83,21 +84,34 @@ sub _get_changes
 
 __END__
 
-=for Pod::Coverage before_release
-
 =begin wikidoc
 
 = SYNOPSIS
 
   # in dist.ini
 
-  [CheckChangesHasContent]
+  [Test::ChangesHasContent]
 
 = DESCRIPTION
 
-This is a "before release" Dist::Zilla plugin that ensures that your Changes
-file actually has some content since the last release.  If it doesn't find any,
-it will abort the release process.
+This is an extension of L<Dist::Zilla::Plugin::InlineFiles>, providing the following file:
+
+=over 4
+
+=item *
+
+xt/release/changes_has_content.t
+
+=back
+
+This test ensures ensures that your Changes file actually has some content
+since the last release.
+
+This can be contrasted to
+L<[CheckChangesHasContent}|Dist::Zilla::Plugin::CheckChangesHasContent>, which
+performs the check at release time, halting the release process if content is
+missing.  Performing the check as a test makes it possible to check more
+frequently, and closer to the point of development.
 
 The algorithm is very naive.  It looks for an unindented line starting with
 the version to be released.  It then looks for any text from that line until
@@ -121,11 +135,12 @@ the release would be halted.
 If you name your change log something other than "Changes", you can configure
 the name with the {changelog} argument:
 
-  [CheckChangesHasContent]
+  [Test::ChangesHasContent]
   changelog = ChangeLog
 
 = SEE ALSO
 
+* [Dist::Zilla::Plugin::CheckChangesHasContent]
 * [Dist::Zilla]
 
 =end wikidoc

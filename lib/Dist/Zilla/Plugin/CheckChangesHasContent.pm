@@ -88,6 +88,10 @@ This is a "before release" Dist::Zilla plugin that ensures that your Changes
 file actually has some content since the last release.  If it doesn't find any,
 it will abort the release process.
 
+This can be contrasted to
+L<[Test::ChangesHasContent}|Dist::Zilla::Plugin::Test::ChangesHasContent>, which
+generates a test to perform the check.
+
 The algorithm is very naive.  It looks for an unindented line starting with
 the version to be released.  It then looks for any text from that line until
 the next unindented line (or the end of the file), ignoring whitespace.
