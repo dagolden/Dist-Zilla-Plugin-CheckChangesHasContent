@@ -5,7 +5,7 @@ use warnings;
 
 use Capture::Tiny qw/capture/;
 use Dist::Zilla::Tester;
-use Test::More 0.88; END { done_testing }
+use Test::More 0.88;
 use Try::Tiny;
 
 my $root = 'corpus/DZ_CheckChangesHasContent';
@@ -183,3 +183,5 @@ END
     "FakeRelease happened",
   );
 }
+
+done_testing;
