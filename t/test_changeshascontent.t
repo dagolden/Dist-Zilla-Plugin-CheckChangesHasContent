@@ -6,7 +6,6 @@ use Dist::Zilla::Tester;
 use Test::Harness;
 use Path::Class;
 use Cwd 'getcwd';
-use IO::Scalar;
 use Capture::Tiny qw/capture/;
 
 my $test_file = file(qw(xt release changes_has_content.t));
