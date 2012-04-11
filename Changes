@@ -2,6 +2,14 @@ Revision history for Dist-Zilla-Plugin-CheckChangesHasContent
 
 {{$NEXT}}
 
+    [BUGFIX]
+
+    - Fixed Test::More done_testing in END block anti-pattern
+
+    [OTHER]
+
+    - Removed unnecessary IO::Scalar dependency
+
 0.004     2012-04-10 20:18:07 America/New_York
 
     [ADDED]
