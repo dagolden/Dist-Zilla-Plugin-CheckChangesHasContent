@@ -53,7 +53,6 @@
             "Dist::Zilla::Tester" : "0",
             "File::Find" : "0",
             "File::Temp" : "0",
-            "IO::Scalar" : "0",
             "Path::Class" : "0",
             "Test::Harness" : "0",
             "Test::More" : "0.88",
@@ -64,11 +63,11 @@
    "provides" : {
       "Dist::Zilla::Plugin::CheckChangesHasContent" : {
          "file" : "lib/Dist/Zilla/Plugin/CheckChangesHasContent.pm",
-         "version" : "0.004"
+         "version" : "0.005"
       },
       "Dist::Zilla::Plugin::Test::ChangesHasContent" : {
          "file" : "lib/Dist/Zilla/Plugin/Test/ChangesHasContent.pm",
-         "version" : "0.004"
+         "version" : "0.005"
       }
    },
    "release_status" : "stable",
@@ -84,6 +83,6 @@
          "web" : "https://github.com/dagolden/dist-zilla-plugin-checkchangeshascontent"
       }
    },
-   "version" : "0.004"
+   "version" : "0.005"
 }
 
