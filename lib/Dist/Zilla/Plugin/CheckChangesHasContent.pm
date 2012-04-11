@@ -2,6 +2,7 @@ use strict;
 use warnings;
 package Dist::Zilla::Plugin::CheckChangesHasContent;
 # ABSTRACT: Ensure Changes has content before releasing
+# VERSION
 
 # Dependencies
 use Dist::Zilla 2.100950 (); # XXX really the next release after this date
@@ -119,6 +120,7 @@ the name with the {changelog} argument:
 
 = SEE ALSO
 
+* [Dist::Zilla::Plugin::Test::ChangesHasContent]
 * [Dist::Zilla]
 
 =end wikidoc

@@ -1,8 +1,8 @@
 use strict;
 use warnings;
 package Dist::Zilla::Plugin::Test::ChangesHasContent;
-
 # ABSTRACT: Release test to ensure Changes has content
+# VERSION
 
 # Dependencies
 use Dist::Zilla;
