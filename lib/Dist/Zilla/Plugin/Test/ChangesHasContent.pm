@@ -42,6 +42,64 @@ __PACKAGE__->meta->make_immutable;
 
 1;
 
+# Pod must be before DATA
+
+=begin wikidoc
+
+= SYNOPSIS
+
+  # in dist.ini
+
+  [Test::ChangesHasContent]
+
+= DESCRIPTION
+
+This is an extension of [Dist::Zilla::Plugin::InlineFiles], providing the following file:
+
+* xt/release/changes_has_content.t
+
+This test ensures ensures that your Changes file actually has some content
+since the last release.
+
+This can be contrasted to [Dist::Zilla::Plugin::CheckChangesHasContent], which
+performs the check at release time, halting the release process if content is
+missing.  Performing the check as a test makes it possible to check more
+frequently, and closer to the point of development.
+
+The algorithm is very naive.  It looks for an unindented line starting with
+the version to be released.  It then looks for any text from that line until
+the next unindented line (or the end of the file), ignoring whitespace.
+
+For example, in the file below, algorithm will find "- blah blah blah":
+
+  Changes file for Foo-Bar
+
+  {{$NEXT}}
+
+    - blah blah blah
+
+  0.001  Wed May 12 13:49:13 EDT 2010
+
+    - the first release
+
+If you had nothing but whitespace between { {{$NEXT}} } and { 0.001 },
+the release would be halted.
+
+If you name your change log something other than "Changes", you can configure
+the name with the {changelog} argument:
+
+  [Test::ChangesHasContent]
+  changelog = ChangeLog
+
+= SEE ALSO
+
+* [Dist::Zilla::Plugin::CheckChangesHasContent]
+* [Dist::Zilla]
+
+=end wikidoc
+
+=cut
+
 __DATA__
 ___[ xt/release/changes_has_content.t ]___
 #!perl
@@ -85,67 +143,4 @@ sub _get_changes
 }
 
 __END__
-
-=begin wikidoc
-
-= SYNOPSIS
-
-  # in dist.ini
-
-  [Test::ChangesHasContent]
-
-= DESCRIPTION
-
-This is an extension of L<Dist::Zilla::Plugin::InlineFiles>, providing the following file:
-
-=over 4
-
-=item *
-
-xt/release/changes_has_content.t
-
-=back
-
-This test ensures ensures that your Changes file actually has some content
-since the last release.
-
-This can be contrasted to
-L<[CheckChangesHasContent]|Dist::Zilla::Plugin::CheckChangesHasContent>, which
-performs the check at release time, halting the release process if content is
-missing.  Performing the check as a test makes it possible to check more
-frequently, and closer to the point of development.
-
-The algorithm is very naive.  It looks for an unindented line starting with
-the version to be released.  It then looks for any text from that line until
-the next unindented line (or the end of the file), ignoring whitespace.
-
-For example, in the file below, algorithm will find "- blah blah blah":
-
-  Changes file for Foo-Bar
-
-  {{$NEXT}}
-
-    - blah blah blah
-
-  0.001  Wed May 12 13:49:13 EDT 2010
-
-    - the first release
-
-If you had nothing but whitespace between { {{$NEXT}} } and { 0.001 },
-the release would be halted.
-
-If you name your change log something other than "Changes", you can configure
-the name with the {changelog} argument:
-
-  [Test::ChangesHasContent]
-  changelog = ChangeLog
-
-= SEE ALSO
-
-* [Dist::Zilla::Plugin::CheckChangesHasContent]
-* [Dist::Zilla]
-
-=end wikidoc
-
-=cut
 
