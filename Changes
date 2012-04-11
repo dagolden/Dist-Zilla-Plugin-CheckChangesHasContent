@@ -2,6 +2,8 @@ Revision history for Dist-Zilla-Plugin-CheckChangesHasContent
 
 {{$NEXT}}
 
+0.005     2012-04-11 14:08:40 America/New_York
+
     [BUGFIX]
 
     - Fixed Test::More done_testing in END block anti-pattern
