@@ -2,6 +2,8 @@ Revision history for Dist-Zilla-Plugin-CheckChangesHasContent
 
 {{$NEXT}}
 
+0.004     2012-04-10 20:18:07 America/New_York
+
     [ADDED]
 
     - new module Test::ChangesHasContent contributed by
