@@ -1,0 +1,89 @@
+{
+   "abstract" : "Ensure Changes has content before releasing",
+   "author" : [
+      "David Golden <dagolden@cpan.org>",
+      "Karen Etheridge <ether@cpan.org>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Dist::Zilla version 4.300009, CPAN::Meta::Converter version 2.120630",
+   "license" : [
+      "apache_2_0"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Dist-Zilla-Plugin-CheckChangesHasContent",
+   "no_index" : {
+      "directory" : [
+         "t",
+         "xt",
+         "examples",
+         "corpus"
+      ],
+      "package" : [
+         "DB"
+      ]
+   },
+   "prereqs" : {
+      "configure" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "6.30"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Dist::Zilla" : "2.100950",
+            "Dist::Zilla::Plugin::InlineFiles" : "0",
+            "Dist::Zilla::Role::BeforeRelease" : "0",
+            "Dist::Zilla::Role::TextTemplate" : "0",
+            "File::pushd" : "0",
+            "Moose" : "0.99",
+            "autodie" : "2.00",
+            "namespace::autoclean" : "0.09",
+            "perl" : "5.006",
+            "strict" : "0",
+            "warnings" : "0"
+         }
+      },
+      "test" : {
+         "requires" : {
+            "Capture::Tiny" : "0",
+            "Cwd" : "0",
+            "Dist::Zilla::Tester" : "0",
+            "File::Find" : "0",
+            "File::Temp" : "0",
+            "IO::Scalar" : "0",
+            "Path::Class" : "0",
+            "Test::Harness" : "0",
+            "Test::More" : "0.88",
+            "Try::Tiny" : "0"
+         }
+      }
+   },
+   "provides" : {
+      "Dist::Zilla::Plugin::CheckChangesHasContent" : {
+         "file" : "lib/Dist/Zilla/Plugin/CheckChangesHasContent.pm",
+         "version" : "0.004"
+      },
+      "Dist::Zilla::Plugin::Test::ChangesHasContent" : {
+         "file" : "lib/Dist/Zilla/Plugin/Test/ChangesHasContent.pm",
+         "version" : "0.004"
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "bugtracker" : {
+         "mailto" : "bug-dist-zilla-plugin-checkchangeshascontent at rt.cpan.org",
+         "web" : "http://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-CheckChangesHasContent"
+      },
+      "homepage" : "https://github.com/dagolden/dist-zilla-plugin-checkchangeshascontent",
+      "repository" : {
+         "type" : "git",
+         "url" : "https://github.com/dagolden/dist-zilla-plugin-checkchangeshascontent.git",
+         "web" : "https://github.com/dagolden/dist-zilla-plugin-checkchangeshascontent"
+      }
+   },
+   "version" : "0.004"
+}
+
