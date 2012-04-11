@@ -2,6 +2,12 @@ Revision history for Dist-Zilla-Plugin-CheckChangesHasContent
 
 {{$NEXT}}
 
+    [ADDED]
+
+    - new module Test::ChangesHasContent contributed by
+      Karen Etheridge to check changes as an xt test
+      (instead of as a pre-release role)
+
 0.003     2010-05-12 21:44:29 America/New_York
 
     - allow Changes entry to be '$version' alone on a line
