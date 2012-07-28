@@ -5,7 +5,7 @@
       "Karen Etheridge <ether@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300009, CPAN::Meta::Converter version 2.120630",
+   "generated_by" : "Dist::Zilla version 4.300018, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "apache_2_0"
    ],
@@ -63,11 +63,11 @@
    "provides" : {
       "Dist::Zilla::Plugin::CheckChangesHasContent" : {
          "file" : "lib/Dist/Zilla/Plugin/CheckChangesHasContent.pm",
-         "version" : "0.005"
+         "version" : "0.006"
       },
       "Dist::Zilla::Plugin::Test::ChangesHasContent" : {
          "file" : "lib/Dist/Zilla/Plugin/Test/ChangesHasContent.pm",
-         "version" : "0.005"
+         "version" : "0.006"
       }
    },
    "release_status" : "stable",
@@ -83,6 +83,6 @@
          "web" : "https://github.com/dagolden/dist-zilla-plugin-checkchangeshascontent"
       }
    },
-   "version" : "0.005"
+   "version" : "0.006"
 }
 
