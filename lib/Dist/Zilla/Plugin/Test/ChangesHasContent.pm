@@ -139,7 +139,7 @@ sub _get_changes
     close $fh;
 
     my @content =
-        grep { /^$newver(?:\s+|$trial_token|$)/ ... /^\S/ } # from newver to un-indented
+        grep { /^$newver(?:$trial_token)?(?:\s+|$)/ ... /^\S/ } # from newver to un-indented
         split /\n/, $changelog;
     shift @content; # drop the version line
 
