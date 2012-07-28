@@ -21,6 +21,12 @@ has changelog => (
   default => 'Changes'
 );
 
+has trial_token => (
+  is => 'ro',
+  isa => 'Str',
+  default => '-TRIAL'
+);
+
 # methods
 
 sub before_release {
@@ -56,8 +62,9 @@ sub _get_changes {
     # parse changelog to find commit message
     my $changelog = Dist::Zilla::File::OnDisk->new( { name => $self->changelog } );
     my $newver    = $self->zilla->version;
+    my $trial_token = $self->trial_token;
     my @content   =
-        grep { /^$newver(?:\s+|$)/ ... /^\S/ } # from newver to un-indented
+        grep { /^$newver(?:$trial_token)?(?:\s+|$)/ ... /^\S/ } # from newver to un-indented
         split /\n/, $changelog->content;
     shift @content; # drop the version line
     # drop unindented last line and trailing blank lines

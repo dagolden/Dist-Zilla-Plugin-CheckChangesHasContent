@@ -95,15 +95,15 @@ END
     is($failed->{$test_name}{canon}, 2, 'the second test failed (Changes file has no content)');
 }
 
-{
+foreach my $version ( '1.23', '1.23-TRIAL' ){
     my $tzil = Dist::Zilla::Tester->from_config(
         { dist_root => $root },
         {
             add_files => {
-                'source/Changes' => <<'END',
+                'source/Changes' => <<"END",
 Changes
 
-1.23
+$version
 
   - this is a change note, I promise
 
