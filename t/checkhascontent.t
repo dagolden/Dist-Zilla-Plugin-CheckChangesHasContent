@@ -145,17 +145,17 @@ END
   );
 }
 
-{
+foreach my $version ( '1.23', '1.23-TRIAL' ){
   my $tzil;
   try {
     $tzil = Dist::Zilla::Tester->from_config(
       { dist_root => $root },
       {
         add_files => {
-          'source/Changes' => <<'END',
+          'source/Changes' => <<"END",
 Changes
 
-1.23
+$version
 
   - this is a change note, I promise
 
