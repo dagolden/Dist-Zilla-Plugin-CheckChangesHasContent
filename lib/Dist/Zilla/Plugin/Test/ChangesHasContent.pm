@@ -8,12 +8,19 @@ package Dist::Zilla::Plugin::Test::ChangesHasContent;
 use Dist::Zilla;
 use autodie 2.00;
 use Moose 0.99;
+use Sub::Exporter::ForMethods;
+use Data::Section 0.200002 # encoding and bytes
+  { installer => Sub::Exporter::ForMethods::method_installer },
+  '-setup' => { encoding => 'bytes' };
+use Moose::Util::TypeConstraints 'role_type';
 use namespace::autoclean 0.09;
 
 # extends, roles, attributes, etc.
 
-extends 'Dist::Zilla::Plugin::InlineFiles';
-with qw/Dist::Zilla::Role::TextTemplate/;
+with qw/Dist::Zilla::Role::FileGatherer
+    Dist::Zilla::Role::FileMunger
+    Dist::Zilla::Role::TextTemplate
+    /;
 
 has changelog => (
   is => 'ro',
@@ -27,23 +34,51 @@ has trial_token => (
   default => '-TRIAL'
 );
 
+has _file => (
+    is => 'rw', isa => role_type('Dist::Zilla::Role::File'),
+);
+
 # methods
 
-around add_file => sub {
-    my ($orig, $self, $file) = @_;
-    return $self->$orig(
-        Dist::Zilla::File::InMemory->new(
-            name    => $file->name,
-            content => $self->fill_in_string($file->content,
-                {
-                    changelog => $self->changelog,
-                    trial_token => $self->trial_token,
-                    newver => $self->zilla->version
-                }
-            )
+sub gather_files
+{
+    my $self = shift;
+
+    my $data = $self->merged_section_data;
+    return unless $data and %$data;
+
+    my ($name, $contentref) = %$data;
+
+    require Dist::Zilla::File::InMemory;
+
+    $self->add_file( $self->_file(
+        Dist::Zilla::File::InMemory->new({
+            name    => $name,
+            content => $$contentref,
+        }))
+    );
+
+    return;
+}
+
+sub munge_files
+{
+    my $self = shift;
+    my $file = $self->_file;
+
+    $file->content(
+        $self->fill_in_string(
+            $file->content,
+            {
+                changelog => $self->changelog,
+                trial_token => $self->trial_token,
+                newver => $self->zilla->version
+            }
         )
     );
-};
+
+    return;
+}
 
 __PACKAGE__->meta->make_immutable;
 
