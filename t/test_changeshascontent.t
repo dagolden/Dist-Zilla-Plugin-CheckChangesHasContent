@@ -4,18 +4,18 @@ use warnings;
 use Test::More 0.88;
 use Dist::Zilla::Tester;
 use Test::Harness;
-use Path::Class;
+use Path::Tiny;
 use Cwd 'getcwd';
 use Capture::Tiny qw/capture/;
 
-my $test_file = file(qw(xt release changes_has_content.t));
+my $test_file = path(qw(xt release changes_has_content.t));
 my $root = 'corpus/DZ_Test_ChangesHasContent';
 
 sub capture_test_results($)
 {
     my $build_dir = shift;
 
-    my $test_file_full = file($build_dir, $test_file)->stringify;
+    my $test_file_full = path($build_dir, $test_file)->stringify;
     my $cwd = getcwd;
     chdir $build_dir;
 
