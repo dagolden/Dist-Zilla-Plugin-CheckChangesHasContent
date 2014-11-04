@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Dist::Zilla::Plugin::Test::ChangesHasContent;
 # ABSTRACT: Release test to ensure Changes has content
-# VERSION
+our $VERSION = '0.007';
 
 # Dependencies
 use Dist::Zilla;
@@ -85,6 +85,8 @@ __PACKAGE__->meta->make_immutable;
 1;
 
 # Pod must be before DATA
+
+=for Pod::Coverage gather_files munge_files
 
 =begin wikidoc
 
