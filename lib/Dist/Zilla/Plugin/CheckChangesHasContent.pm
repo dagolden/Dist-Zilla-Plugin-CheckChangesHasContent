@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Dist::Zilla::Plugin::CheckChangesHasContent;
 # ABSTRACT: Ensure Changes has content before releasing
-our $VERSION = '0.007';
+our $VERSION = '0.008';
 
 # Dependencies
 use Dist::Zilla 2.100950 (); # XXX really the next release after this date
