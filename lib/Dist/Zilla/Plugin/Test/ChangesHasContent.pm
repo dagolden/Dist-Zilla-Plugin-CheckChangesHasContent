@@ -88,24 +88,20 @@ __PACKAGE__->meta->make_immutable;
 
 =for Pod::Coverage gather_files munge_files
 
-=begin wikidoc
-
-= SYNOPSIS
+=head1 SYNOPSIS
 
   # in dist.ini
 
   [Test::ChangesHasContent]
 
-= DESCRIPTION
+=head1 DESCRIPTION
 
-This is an extension of [Dist::Zilla::Plugin::InlineFiles], providing the following file:
-
-* xt/release/changes_has_content.t
+This plugin provides C<xt/release/changes_has_content.t>.
 
 This test ensures ensures that your Changes file actually has some content
 since the last release.
 
-This can be contrasted to [Dist::Zilla::Plugin::CheckChangesHasContent], which
+This can be contrasted to L<Dist::Zilla::Plugin::CheckChangesHasContent>, which
 performs the check at release time, halting the release process if content is
 missing.  Performing the check as a test makes it possible to check more
 frequently, and closer to the point of development.
@@ -126,21 +122,19 @@ For example, in the file below, algorithm will find "- blah blah blah":
 
     - the first release
 
-If you had nothing but whitespace between { {{$NEXT}} } and { 0.001 },
+If you had nothing but whitespace between C<{{$NEXT}}> and C<0.001>,
 the release would be halted.
 
 If you name your change log something other than "Changes", you can configure
-the name with the {changelog} argument:
+the name with the C<changelog> argument:
 
   [Test::ChangesHasContent]
   changelog = ChangeLog
 
-= SEE ALSO
+=head1 SEE ALSO
 
-* [Dist::Zilla::Plugin::CheckChangesHasContent]
-* [Dist::Zilla]
-
-=end wikidoc
+* L<Dist::Zilla::Plugin::CheckChangesHasContent>
+* L<Dist::Zilla>
 
 =cut
 

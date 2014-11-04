@@ -82,21 +82,19 @@ __END__
 
 =for Pod::Coverage before_release
 
-=begin wikidoc
-
-= SYNOPSIS
+=head1 SYNOPSIS
 
   # in dist.ini
 
   [CheckChangesHasContent]
 
-= DESCRIPTION
+=head1 DESCRIPTION
 
 This is a "before release" Dist::Zilla plugin that ensures that your Changes
 file actually has some content since the last release.  If it doesn't find any,
 it will abort the release process.
 
-This can be contrasted to [Dist::Zilla::Plugin::Test::ChangesHasContent], which
+This can be contrasted to L<Dist::Zilla::Plugin::Test::ChangesHasContent>, which
 generates a test to perform the check.
 
 The algorithm is very naive.  It looks for an unindented line starting with
@@ -115,21 +113,19 @@ For example, in the file below, algorithm will find "- blah blah blah":
 
     - the first release
 
-If you had nothing but whitespace between { {{$NEXT}} } and { 0.001 },
+If you had nothing but whitespace between C<{{$NEXT}}> and C<0.001>,
 the release would be halted.
 
 If you name your change log something other than "Changes", you can configure
-the name with the {changelog} argument:
+the name with the C<changelog> argument:
 
   [CheckChangesHasContent]
   changelog = ChangeLog
 
-= SEE ALSO
+=head1 SEE ALSO
 
-* [Dist::Zilla::Plugin::Test::ChangesHasContent]
-* [Dist::Zilla]
-
-=end wikidoc
+* L<Dist::Zilla::Plugin::Test::ChangesHasContent>
+* L<Dist::Zilla>
 
 =cut
 
