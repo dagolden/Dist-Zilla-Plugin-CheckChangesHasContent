@@ -2,6 +2,8 @@ Revision history for Dist-Zilla-Plugin-CheckChangesHasContent
 
 {{$NEXT}}
 
+0.008     2015-03-24 23:31:03-04:00 America/New_York
+
     [FIXED]
 
     - Avoid meta validation issues during testing
