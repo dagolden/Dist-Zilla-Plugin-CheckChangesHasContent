@@ -2,6 +2,8 @@ Revision history for Dist-Zilla-Plugin-CheckChangesHasContent
 
 {{$NEXT}}
 
+0.010     2016-05-25 15:10:26-04:00 America/New_York
+
     [FIXED]
 
     - Dropped unintentional test dependency on Dist::Zilla v6
