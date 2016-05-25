@@ -28,7 +28,11 @@ sub capture_test_results($)
     return @results, $output;
 }
 
+SKIP:
 {
+    skip '[NextRelease] 6.005 checks for missing Changes file before tests are run', 1
+        if eval { require Dist::Zilla::Plugin::NextRelease; Dist::Zilla::Plugin::NextRelease->VERSION('6.005') };
+
     my $tzil = Dist::Zilla::Tester->from_config(
         { dist_root => $root },
     );

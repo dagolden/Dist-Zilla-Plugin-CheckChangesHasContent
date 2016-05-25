@@ -25,7 +25,7 @@ my $root = 'corpus/DZ_CheckChangesHasContent';
     my $err = $_;
     like(
       $err,
-      qr/No Changes file found/i,
+      qr/No Changes file found|failed to find Changes in the distribution/i,
       "saw missing Changes file warning",
     );
     ok(
