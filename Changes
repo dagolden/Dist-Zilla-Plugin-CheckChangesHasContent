@@ -2,6 +2,8 @@ Revision history for Dist-Zilla-Plugin-CheckChangesHasContent
 
 {{$NEXT}}
 
+0.009     2016-05-25 05:52:29-04:00 America/New_York
+
     [FIXED]
 
     - fixed tests broken by changes in [NextRelease] 6.005
