@@ -13,6 +13,7 @@ use Data::Section 0.200002 # encoding and bytes
   { installer => Sub::Exporter::ForMethods::method_installer },
   '-setup' => { encoding => 'bytes' };
 use Moose::Util::TypeConstraints 'role_type';
+use List::Util 'first';
 use namespace::autoclean 0.09;
 
 # extends, roles, attributes, etc.
@@ -66,13 +67,21 @@ sub munge_files
     my $self = shift;
     my $file = $self->_file;
 
+    my $changes_filename = $self->changelog;
+    my $changes_file = first { $_->name eq $changes_filename } @{ $self->zilla->files };
+    $self->log_fatal([ 'No %s file found', $changes_filename ]) if not $changes_file;
+    $self->log_fatal([ 'Cannot decode %s from bytes encoding', $changes_filename ])
+        if $changes_filename->can('is_bytes') and $changes_filename->is_bytes;
+    my $encoding = $changes_file->can('encoding') ? $changes_file->encoding : undef;
+
     $file->content(
         $self->fill_in_string(
             $file->content,
             {
                 changelog => $self->changelog,
                 trial_token => $self->trial_token,
-                newver => $self->zilla->version
+                newver => $self->zilla->version,
+                encoding => $encoding,
             }
         )
     );
@@ -148,6 +157,7 @@ note 'Checking Changes';
 my $changes_file = '{{$changelog}}';
 my $newver = '{{$newver}}';
 my $trial_token = '{{$trial_token}}';
+my $encoding = '{{$encoding}}';
 
 SKIP: {
     ok(-e $changes_file, "$changes_file file exists")
@@ -158,8 +168,6 @@ SKIP: {
 
 done_testing;
 
-# _get_changes copied and adapted from Dist::Zilla::Plugin::Git::Commit
-# by Jerome Quelin
 sub _get_changes
 {
     my $newver = shift;
@@ -167,6 +175,10 @@ sub _get_changes
     # parse changelog to find commit message
     open(my $fh, '<', $changes_file) or die "cannot open $changes_file: $!";
     my $changelog = join('', <$fh>);
+    if ($encoding) {
+        require Encode;
+        $changelog = Encode::decode($encoding, $changelog, Encode::FB_CROAK());
+    }
     close $fh;
 
     my @content =
