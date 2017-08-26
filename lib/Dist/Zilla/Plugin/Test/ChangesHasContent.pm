@@ -149,8 +149,6 @@ the name with the C<changelog> argument:
 
 __DATA__
 ___[ xt/release/changes_has_content.t ]___
-#!perl
-
 use Test::More tests => 2;
 
 note 'Checking Changes';
