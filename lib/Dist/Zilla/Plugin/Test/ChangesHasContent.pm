@@ -7,7 +7,7 @@ our $VERSION = '0.011';
 # Dependencies
 use Dist::Zilla;
 use autodie 2.00;
-use Moose 0.99;
+use Moose 2;
 use Sub::Exporter::ForMethods;
 use Data::Section 0.200002 # encoding and bytes
   { installer => Sub::Exporter::ForMethods::method_installer },

@@ -5,11 +5,11 @@ package Dist::Zilla::Plugin::CheckChangesHasContent;
 our $VERSION = '0.011';
 
 # Dependencies
-use Dist::Zilla 2.100950 (); # XXX really the next release after this date
+use Dist::Zilla 6 (); # XXX really the next release after this date
 use autodie 2.00;
-use Moose 0.99;
+use Moose 2;
 use List::Util 'first';
-use namespace::autoclean 0.09;
+use namespace::autoclean 0.28;
 
 # extends, roles, attributes, etc.
 
